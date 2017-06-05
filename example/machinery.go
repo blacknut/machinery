@@ -5,13 +5,13 @@ import (
 	"os"
 	"time"
 
-	"github.com/RichardKnop/machinery/v1"
-	"github.com/RichardKnop/machinery/v1/config"
-	"github.com/RichardKnop/machinery/v1/log"
-	"github.com/RichardKnop/machinery/v1/tasks"
+	"github.com/blacknut/machinery/v1"
+	"github.com/blacknut/machinery/v1/config"
+	"github.com/blacknut/machinery/v1/log"
+	"github.com/blacknut/machinery/v1/tasks"
 	"github.com/urfave/cli"
 
-	exampletasks "github.com/RichardKnop/machinery/example/tasks"
+	exampletasks "github.com/blacknut/machinery/example/tasks"
 )
 
 var (

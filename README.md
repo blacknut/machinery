@@ -1,17 +1,17 @@
-[1]: https://raw.githubusercontent.com/RichardKnop/assets/master/machinery/example_worker.png
-[2]: https://raw.githubusercontent.com/RichardKnop/assets/master/machinery/example_worker_receives_tasks.png
+[1]: https://raw.githubusercontent.com/blacknut/assets/master/machinery/example_worker.png
+[2]: https://raw.githubusercontent.com/blacknut/assets/master/machinery/example_worker_receives_tasks.png
 
 ## Machinery
 
 Machinery is an asynchronous task queue/job queue based on distributed message passing.
 
-[![Travis Status for RichardKnop/machinery](https://travis-ci.org/RichardKnop/machinery.svg?branch=master&label=linux+build)](https://travis-ci.org/RichardKnop/machinery)
-[![godoc for RichardKnop/machinery](https://godoc.org/github.com/nathany/looper?status.svg)](http://godoc.org/github.com/RichardKnop/machinery/v1)
-[![goreportcard for RichardKnop/machinery](https://goreportcard.com/badge/github.com/RichardKnop/machinery)](https://goreportcard.com/report/RichardKnop/machinery)
-[![Codeship Status for RichardKnop/machinery](https://app.codeship.com/projects/35dc5880-71a7-0133-ec05-06b1c29ec1d7/status?branch=master)](https://app.codeship.com/projects/116961)
+[![Travis Status for blacknut/machinery](https://travis-ci.org/blacknut/machinery.svg?branch=master&label=linux+build)](https://travis-ci.org/blacknut/machinery)
+[![godoc for blacknut/machinery](https://godoc.org/github.com/nathany/looper?status.svg)](http://godoc.org/github.com/blacknut/machinery/v1)
+[![goreportcard for blacknut/machinery](https://goreportcard.com/badge/github.com/blacknut/machinery)](https://goreportcard.com/report/blacknut/machinery)
+[![Codeship Status for blacknut/machinery](https://app.codeship.com/projects/35dc5880-71a7-0133-ec05-06b1c29ec1d7/status?branch=master)](https://app.codeship.com/projects/116961)
 
-[![Sourcegraph for RichardKnop/machinery](https://sourcegraph.com/github.com/RichardKnop/machinery/-/badge.svg)](https://sourcegraph.com/github.com/RichardKnop/machinery?badge)
-[![Donate Bitcoin](https://img.shields.io/badge/donate-bitcoin-orange.svg)](https://richardknop.github.io/donate/)
+[![Sourcegraph for blacknut/machinery](https://sourcegraph.com/github.com/blacknut/machinery/-/badge.svg)](https://sourcegraph.com/github.com/blacknut/machinery?badge)
+[![Donate Bitcoin](https://img.shields.io/badge/donate-bitcoin-orange.svg)](https://blacknut.github.io/donate/)
 
 ---
 
@@ -43,7 +43,7 @@ Machinery is an asynchronous task queue/job queue based on distributed message p
 Add the Machinery library to your $GOPATH/src:
 
 ```sh
-go get github.com/RichardKnop/machinery/v1
+go get github.com/blacknut/machinery/v1
 ```
 
 First, you will need to define some tasks. Look at sample tasks in `example/tasks/tasks.go` to see a few examples.
@@ -163,7 +163,7 @@ For example:
 
 1. `amqp://guest:guest@localhost:5672`
 
-> Keep in mind AMQP is not recommended as a result backend. See [Keeping Results](https://github.com/RichardKnop/machinery#keeping-results)
+> Keep in mind AMQP is not recommended as a result backend. See [Keeping Results](https://github.com/blacknut/machinery#keeping-results)
 
 ##### MongoDB
 
@@ -213,7 +213,7 @@ type Interface interface {
 }
 ```
 
-Then just set the logger in your setup code by calling `Set` function exported by `github.com/RichardKnop/machinery/v1/log` package:
+Then just set the logger in your setup code by calling `Set` function exported by `github.com/blacknut/machinery/v1/log` package:
 
 ```go
 log.Set(myCustomLogger)
@@ -225,8 +225,8 @@ A Machinery library must be instantiated before use. The way this is done is by 
 
 ```go
 import (
-  "github.com/RichardKnop/machinery/v1/config"
-  "github.com/RichardKnop/machinery/v1"
+  "github.com/blacknut/machinery/v1/config"
+  "github.com/blacknut/machinery/v1"
 )
 
 var cnf = config.Config{
@@ -441,7 +441,7 @@ Tasks can be called by passing an instance of `Signature` to an `Server` instanc
 
 ```go
 import (
-  "github.com/RichardKnop/machinery/v1/tasks"
+  "github.com/blacknut/machinery/v1/tasks"
 )
 
 signature := &tasks.Signature{
@@ -588,8 +588,8 @@ Running a single asynchronous task is fine but often you will want to design a w
 
 ```go
 import (
-  "github.com/RichardKnop/machinery/v1/tasks"
-  "github.com/RichardKnop/machinery/v1"
+  "github.com/blacknut/machinery/v1/tasks"
+  "github.com/blacknut/machinery/v1"
 )
 
 signature1 := tasks.Signature{
@@ -649,8 +649,8 @@ for _, asyncResult := range asyncResults {
 
 ```go
 import (
-  "github.com/RichardKnop/machinery/v1/tasks"
-  "github.com/RichardKnop/machinery/v1"
+  "github.com/blacknut/machinery/v1/tasks"
+  "github.com/blacknut/machinery/v1"
 )
 
 signature1 := tasks.Signature{
@@ -725,8 +725,8 @@ for _, result := range results {
 
 ```go
 import (
-  "github.com/RichardKnop/machinery/v1/tasks"
-  "github.com/RichardKnop/machinery/v1"
+  "github.com/blacknut/machinery/v1/tasks"
+  "github.com/blacknut/machinery/v1"
 )
 
 signature1 := tasks.Signature{

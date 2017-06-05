@@ -7,11 +7,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/RichardKnop/machinery/v1/common"
-	"github.com/RichardKnop/machinery/v1/config"
-	"github.com/RichardKnop/machinery/v1/log"
-	"github.com/RichardKnop/machinery/v1/retry"
-	"github.com/RichardKnop/machinery/v1/tasks"
+	"github.com/blacknut/machinery/v1/common"
+	"github.com/blacknut/machinery/v1/config"
+	"github.com/blacknut/machinery/v1/log"
+	"github.com/blacknut/machinery/v1/retry"
+	"github.com/blacknut/machinery/v1/tasks"
 	"github.com/streadway/amqp"
 )
 
