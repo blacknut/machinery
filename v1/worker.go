@@ -3,6 +3,7 @@ package machinery
 import (
 	"fmt"
 	"strings"
+	"sync"
 	"time"
 
 	"os"
@@ -19,6 +20,8 @@ import (
 type Worker struct {
 	server      *Server
 	ConsumerTag string
+	wg          sync.WaitGroup
+	sig         chan os.Signal
 }
 
 // Launch starts a new worker process. The worker subscribes
@@ -40,8 +43,7 @@ func (worker *Worker) Launch() error {
 	}
 
 	errorsChan := make(chan error)
-	sig := make(chan os.Signal, 1)
-	signal.Notify(sig, os.Interrupt, syscall.SIGTERM)
+	signal.Notify(worker.sig, os.Interrupt, syscall.SIGTERM)
 
 	go func() {
 		for {
@@ -57,7 +59,7 @@ func (worker *Worker) Launch() error {
 	}()
 
 	go func() {
-		err := fmt.Errorf("Signal received: %v. Quitting the worker", <-sig)
+		err := fmt.Errorf("Signal received: %v. Quitting the worker", <-worker.sig)
 		log.WARNING.Print(err.Error())
 		worker.Quit()
 		errorsChan <- err
@@ -69,10 +71,30 @@ func (worker *Worker) Launch() error {
 // Quit tears down the running worker process
 func (worker *Worker) Quit() {
 	worker.server.GetBroker().StopConsuming()
+
+	completed := make(chan struct{})
+
+	go func() {
+		log.INFO.Println("Waiting for all taks to complete")
+		worker.wg.Wait()
+		close(completed)
+	}()
+
+	select {
+	case <-completed:
+		log.INFO.Println("All tasks completed")
+		return
+	case <-worker.sig:
+		log.WARNING.Println("Another signal received, let's force quit")
+		return
+	}
 }
 
 // Process handles received tasks and triggers success/error callbacks
 func (worker *Worker) Process(signature *tasks.Signature) error {
+	worker.wg.Add(1)
+	defer worker.wg.Done()
+
 	// If the task is not registered with this worker, do not continue
 	// but only return nil as we do not want to restart the worker process
 	if !worker.server.IsTaskRegistered(signature.Name) {

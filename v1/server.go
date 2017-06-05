@@ -3,6 +3,7 @@ package machinery
 import (
 	"errors"
 	"fmt"
+	"os"
 	"sync"
 
 	"github.com/blacknut/machinery/v1/backends"
@@ -54,6 +55,7 @@ func (server *Server) NewWorker(consumerTag string) *Worker {
 	return &Worker{
 		server:      server,
 		ConsumerTag: consumerTag,
+		sig:         make(chan os.Signal, 1),
 	}
 }
 
